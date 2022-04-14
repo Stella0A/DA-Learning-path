@@ -1,2 +1,2 @@
 # Practices
-My First attempt at practicing SQL queries
+My First attempt at writing SQL queries

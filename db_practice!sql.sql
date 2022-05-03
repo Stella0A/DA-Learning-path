@@ -1,5 +1,7 @@
 CREATE DATABASE sql_new;
+
 USE sql_new;
+
 CREATE table productions
 (employee_id int PRIMARY KEY,
 first_name VARCHAR(20) not null,

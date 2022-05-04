@@ -1,6 +1,9 @@
+----creating a new database----
 CREATE DATABASE sql_new;
 
 USE sql_new;
+
+----creating a new table productionsa and inserting values into the table----
 
 CREATE table productions
 (employee_id int PRIMARY KEY,
@@ -24,7 +27,8 @@ VALUES(20487, 'Olajumoke','Ade', 'Lekki','Female','2020-01-01'),
   SELECT * FROM productions
   SELECT * FROM payments
   SELECT * FROM orders
-
+  
+----creating a new table payments and inserting values into the table---
 CREATE table payments
 (Acct_no BIGINT UNIQUE,
 employee_id INT not null references productions(employee_id),
@@ -38,6 +42,8 @@ VALUES(20487, 1, 250000, 'Cash'),
       (40987, 4, 670000, 'Transfer'),
       (40988, 5, 500000, 'Transfer');
       
+----creating a new table orders and inserting values into the table---    
+
       CREATE table orders
       (product_id INT PRIMARY KEY,
       product_name VARCHAR(20) not null,

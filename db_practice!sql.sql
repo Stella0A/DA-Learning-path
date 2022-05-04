@@ -8,14 +8,25 @@ first_name VARCHAR(20) not null,
 last_name VARCHAR(20) ,
 address VARCHAR(20) ,
 gender CHAR(6) not null CHECK(gender= 'male' or gender ='female'),
-Hire_date DATE not null);
+Hire_date DATE not null)
+INSERT INTO productions
+VALUES(20487, 'Olajumoke','Ade', 'Lekki','Female','2020-01-01'),
+      (20587, 'Olamiposi', 'Dickson', 'Lekki','Female','2020-01-09'),
+	  (30787, 'John', 'Malcom', 'VI','Male','2020-07-01'),
+      (40987, 'Charlie', 'Simpson', 'Ogba','Male','2021-01-12'),
+      (40988, 'Cain', 'Bently', 'Ikotun','Male','2020-09-08'),
+      (40989, 'Cynthia', 'Bently', 'Ikotun','Female','2020-09-08'),
+      (40985, 'Bimba', 'Cole', 'Ikota','Male','2019-09-08'),
+      (40983, 'Jay', 'Comma', 'Abuja','Male','2021-05-15'),
+      (40780, 'Des', 'Camila', 'Maitama','Female','2021-01-08'),
+      (40950, 'Ifeoma', 'Katrina', 'Ikeja','Female','2020-05-08');
 
 CREATE table payments
 (Acct_no BIGINT UNIQUE,
 employee_id INT not null references productions(employee_id),
 salary BIGINT not null check(salary>0),
 Bank VARCHAR(15) Default 'ZenithBank',
-PaymentsMethod VARCHAR(15) CHECK(PaymentsMethod= 'Cash' or paymentsMethod= 'Transfer'));
+PaymentsMethod VARCHAR(15) CHECK(PaymentsMethod= 'Cash' or paymentsMethod= 'Transfer'))
 INSERT INTO payments(Acct_no,employee_id,salary,PaymentsMethod)
 VALUES(20487, 1, 250000, 'Cash'),
       (20587, 2, 240000, 'Transfer'),
@@ -23,7 +34,6 @@ VALUES(20487, 1, 250000, 'Cash'),
       (40987, 4, 670000, 'Transfer'),
       (40988, 5, 500000, 'Transfer');
       
-    
       CREATE table orders
       (product_id INT PRIMARY KEY,
       product_name VARCHAR(20) not null,

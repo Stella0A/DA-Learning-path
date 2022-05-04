@@ -20,6 +20,10 @@ VALUES(20487, 'Olajumoke','Ade', 'Lekki','Female','2020-01-01'),
       (40983, 'Jay', 'Comma', 'Abuja','Male','2021-05-15'),
       (40780, 'Des', 'Camila', 'Maitama','Female','2021-01-08'),
       (40950, 'Ifeoma', 'Katrina', 'Ikeja','Female','2020-05-08');
+      
+  SELECT * FROM productions
+  SELECT * FROM payments
+  SELECT * FROM orders
 
 CREATE table payments
 (Acct_no BIGINT UNIQUE,

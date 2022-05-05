@@ -1,2 +1,3 @@
-# SQL learning path
-My First attempt at writing SQL queries. I have been learning and writing SQL queries in my learning path as a Data Analyst.I will be putting in here all I have worked on.
+# SQL Files
+
+A collection of my sample SQL files. I have been learning and writing SQL queries in my learning path as a Data Analyst.I will be putting in here all projects I am working on.

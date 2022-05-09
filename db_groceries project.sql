@@ -106,12 +106,4 @@ GROUP BY date
 ORDER BY 5 ASC
 LIMIT 10;
 
-SELECT Date,Member_number,itemDescription,
-COUNT(itemDescription) OVER (PARTITION BY Member_number) AS Salescount
-FROM groceries_dataset2
-ORDER BY Member_number;
 
-SELECT DATE_PART(Month,Date) as Month,
-DATE_PART(Year,Date) as Year,
-DATE_PART(Day,Date) as Day
-FROM groceries_dataset2

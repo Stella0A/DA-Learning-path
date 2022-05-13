@@ -224,7 +224,7 @@ JOIN menu men ON men.product_id = sal.product_id)
 SELECT *,
 CASE
 WHEN member = 'N' THEN 'Null'
-ELSE ROW_NUMBER() OVER (ORDER BY customer_id) 
+ELSE DENSE_RANK() OVER (ORDER BY product_name) 
 END AS ranking
 FROM customers_list
 ORDER BY customer_id,order_date,product_name

@@ -16,10 +16,10 @@ SELECT COUNT(distinct itemDescription)
 FROM groceries_dataset2;
 
 
-Here I want to know the total number of individual item purchased on the groceries list
+Here I want to know the total orders made per date on the groceries list
 SELECT 
-    itemDescription,
-    COUNT(Member_number) AS Total
+    Date, itemDescription,
+    COUNT( itemDescription) AS Total_orders
 FROM
     groceries_dataset2
 GROUP BY itemDescription

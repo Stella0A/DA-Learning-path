@@ -26,7 +26,7 @@ GROUP BY itemDescription
 ORDER BY 2 DESC;
 
 
----- most purchased item and how any times it was purchased by all customers----
+---- most purchased item and how any times it was purchased by all customers-------
 SELECT itemDescription,COUNT(Member_number) AS mostpurchaseditem
 FROM groceries_dataset2
 GROUP BY itemDescription

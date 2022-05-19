@@ -11,12 +11,11 @@ Import data csv into the database
 
 USE groceries_project;
 
-Here I write queries to count all the items in the groceries_list
+#total number of items on the groceries_list
 SELECT COUNT(distinct itemDescription)
 FROM groceries_dataset2;
 
-
-Here I want to know the total orders made per date on the groceries list
+#total orders made per date on the groceries list
 SELECT 
     Date, itemDescription,
     COUNT( itemDescription) AS Total_orders
@@ -26,7 +25,7 @@ GROUP BY itemDescription
 ORDER BY 2 DESC;
 
 
----- most purchased item and how any times it was purchased by all customers-------
+#most purchased item and how any times it was purchased by all customers
 SELECT itemDescription,COUNT(Member_number) AS mostpurchaseditem
 FROM groceries_dataset2
 GROUP BY itemDescription
@@ -34,14 +33,14 @@ ORDER BY mostpurchaseditem DESC
 LIMIT 1;
 
 
------number of times each customer purchased an item-------
+#number of times each customer purchased an item
 SELECT DISTINCT Member_number,COUNT(Date) AS Totalitemsbought
 FROM groceries_dataset2
 GROUP BY Member_number
 ORDER BY 2 DESC;
 
 
---------Ten most purchased items--------------
+#Ten most purchased items
 SELECT itemDescription,COUNT(itemDescription) AS Mostpurchaseditem
 FROM groceries_dataset2
 GROUP BY itemDescription
@@ -49,7 +48,7 @@ ORDER BY 2 DESC
 LIMIT 10
 
 
-------Ten least purchased items------
+#Ten least purchased items
 SELECT itemDescription,COUNT(itemDescription) AS Leastpurchaseditem
 FROM groceries_dataset2
 WHERE itemDescription IS NOT NULL
@@ -58,7 +57,7 @@ ORDER BY 2 ASC
 LIMIT 10;
 
 
-----------dates the highest sales were made--------
+#dates the highest sales were made
 SELECT date,itemDescription,COUNT(itemDescription) AS Highestsales
 FROM groceries_dataset2
 GROUP BY date
@@ -66,8 +65,8 @@ ORDER BY 3 DESC
 LIMIT 10;
 
 
-----------dates the lowest sales were made--------
-SELECT date,itemDescription,COUNT(itemDescription) AS Highestsales
+#dates the lowest sales were made
+SELECT date,itemDescription,COUNT(itemDescription) AS Low_sales
 FROM groceries_dataset2
 WHERE itemDescription IS NOT NULL
 GROUP BY date
@@ -75,7 +74,7 @@ ORDER BY 3 ASC
 LIMIT 10;
 
 
-------filtering the Month out of the date to find out the Month item sells the most-------
+#filtering the Month out of the date to find out the Month item sells the most
 SELECT MONTH(Date) AS Month,date,itemDescription,COUNT(itemDescription) AS sales
 FROM groceries_dataset2
 WHERE itemDescription IS NOT NULL
@@ -83,7 +82,7 @@ GROUP BY date
 ORDER BY 4 DESC
 LIMIT 10;
 
-------filtering the Month out of the date to find out the Month item sells the least-------
+#filtering the Month out of the date to find out the Month item sells the least
 WITH cte_dataset AS (
 SELECT MONTH(Date) AS Month,Date,COUNT(itemDescription) AS sales,itemDescription
 FROM groceries_dataset2
@@ -96,7 +95,7 @@ SELECT *
 FROM cte_dataset;
 
 
-------filtering the Days out of the date to find out the Days the items sells most-------
+#filtering the Days out of the date to find out the Days the items sells most
 SELECT DAY(Date) AS Day,MONTH(Date) AS Month,Date,
 itemDescription,
 COUNT(itemDescription) AS sales
@@ -107,7 +106,7 @@ ORDER BY 5 DESC
 LIMIT 10;
 
 
-------filtering the Days out of the date to find out the Days the items sells least-------
+#filtering the Days out of the date to find out the Days the items sells least
 SELECT DAY(Date) AS Day,MONTH(Date) AS Month,Date,
 itemDescription,
 COUNT(itemDescription) AS sales

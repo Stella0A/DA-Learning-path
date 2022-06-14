@@ -83,9 +83,9 @@ The USE statement tells MySQL to use the named database as the default (current)
 	SELECT * FROM menu;
 	SELECT * FROM member;
 	
-#Business questions
+# Case study questions
 
-What is the total amount each customer spent at the restaurant?
+# What is the total amount each customer spent at the restaurant?
 
 	SELECT sal.customer_id, SUM(men.price) AS total_spent
 	FROM sales sal
@@ -94,7 +94,7 @@ What is the total amount each customer spent at the restaurant?
 	GROUP BY sal.customer_id
 	ORDER BY total_spent DESC;
 
-How many days has each customer visited the restaurant?
+# How many days has each customer visited the restaurant?
 
 	SELECT customer_id,
 	COUNT(DISTINCT order_date) AS visits
@@ -102,7 +102,7 @@ How many days has each customer visited the restaurant?
 	GROUP BY customer_id
 	ORDER BY visits DESC;
 
-What was the first item from the menu purchased by each customer?
+# What was the first item from the menu purchased by each customer?
 
 	WITH ranked_products AS (
 	SELECT mb.customer_id,m.product_name,s.order_date,
@@ -118,7 +118,7 @@ What was the first item from the menu purchased by each customer?
 	GROUP BY customer_id,purchased_first;
 
 
-What is the most purchased item on the menu and how many times was it purchased by all customers?
+# What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 	SELECT men.product_name,
 	COUNT(sal.product_id) AS times_purchased
@@ -128,7 +128,7 @@ What is the most purchased item on the menu and how many times was it purchased 
 	ORDER BY times_purchased DESC
 	LIMIT 1;
 
-Which item was the most popular for each customer?
+# Which item was the most popular for each customer?
 
 	SELECT men.product_name,
 	COUNT(sal.product_id) AS most_popular_item
@@ -138,7 +138,7 @@ Which item was the most popular for each customer?
 	ORDER BY most_popular_item DESC
 	LIMIT 1;
 
-Which item was purchased first by the customer after they became a member?
+# Which item was purchased first by the customer after they became a member?
 
 	WITH ranked_products AS (
 	SELECT mb.customer_id,m.product_name,s.order_date,
@@ -154,7 +154,7 @@ Which item was purchased first by the customer after they became a member?
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
 
-Which item was purchased just before the customer became a member?
+# Which item was purchased just before the customer became a member?
 
 	SELECT men.product_name,
 	COUNT(sal.product_id) AS times_purchased
@@ -164,7 +164,7 @@ Which item was purchased just before the customer became a member?
 	ORDER BY times_purchased DESC
 	LIMIT 1;
 
-Which item was the most popular for each customer?
+# Which item was the most popular for each customer?
 
 	SELECT men.product_name,
 	COUNT(sal.product_id) AS most_popular_item
@@ -174,7 +174,7 @@ Which item was the most popular for each customer?
 	ORDER BY most_popular_item DESC
 	LIMIT 1;
 
-Which item was purchased first by the customer after they became a member?
+# Which item was purchased first by the customer after they became a member?
 
 	WITH ranked_products AS (
 	SELECT mb.customer_id,m.product_name,s.order_date,
@@ -190,7 +190,7 @@ Which item was purchased first by the customer after they became a member?
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
 
-Which item was purchased just before the customer became a member?
+# Which item was purchased just before the customer became a member?
 
 	WITH ranked_products AS (
 	SELECT mb.customer_id,m.product_name,s.order_date,
@@ -206,7 +206,7 @@ Which item was purchased just before the customer became a member?
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
 
-What is the total items and amount spent for each member before they became a member?
+# What is the total items and amount spent for each member before they became a member?
 
 	WITH overalltotal_payments AS (
 	SELECT mb.customer_id,m.product_name,m.price
@@ -221,7 +221,7 @@ What is the total items and amount spent for each member before they became a me
 	GROUP BY customer_id
 	ORDER BY Amount_spent;
 
-If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+# If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 	WITH points_per_purchase AS(
 	SELECT sal.customer_id,men.product_name,men.price,
@@ -236,7 +236,7 @@ If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how
 	GROUP BY customer_id
 	ORDER BY customer_id;
 
-In the first week after a customer joins the program (including their join date) they earn 2x points on all items,
+# In the first week after a customer joins the program (including their join date) they earn 2x points on all items,
  not just sushi - how many points do customer A and B have at the end of January?
  
 	WITH points_per_purchase AS(
@@ -253,7 +253,7 @@ In the first week after a customer joins the program (including their join date)
 	GROUP BY customer_id
 	ORDER BY customer_id;
 
-Create a table adding the customer_id,order_date,product_name,price,and add a column to show customers who are members
+# Create a table adding the customer_id,order_date,product_name,price,and add a column to show customers who are members
 
 	SELECT sal.customer_id,sal.order_date,men.product_name,men.price,
 	CASE
@@ -265,7 +265,7 @@ Create a table adding the customer_id,order_date,product_name,price,and add a co
 	JOIN menu men ON men.product_id = sal.product_id
 	ORDER BY customer_id,order_date,product_name;
 
-Create a table adding the customer_id,order_date,product_name,price,and add a column to show ranking values for the records when customers are not yet part of the loyalty program
+# Create a table adding the customer_id,order_date,product_name,price,and add a column to show ranking values for the records when customers are not yet part of the loyalty program
 
 	With customers_list AS (
 	SELECT sal.customer_id,sal.order_date,men.product_name,men.price,

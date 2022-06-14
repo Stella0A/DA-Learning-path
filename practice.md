@@ -16,22 +16,22 @@ A database is an organized collection of structured information, or data, typica
 # Creating data tables and inserting values into the table
 After creating the database that will house the tables, I created the tables with the various data types and inserted my data.
 
-Database data types refer to the format of data storage that can hold a distinct type or range of values.Some common data types include integers, floating point numbers, characters, strings, and arrays.E.g Dates follow the DATE structure, short numbers like 14, 20, 200 follow the INT(integers) data type while larger numbers like phone numbers follow the BIGINT type. Read more on data types here https://teachcomputerscience.com/database-data-types/.
+A data type is a specific kind of data attribute that tells what kind of value the data is. In other words, a data type tells you what kind of data you're working with. Data types can be different depending on the query language you're using. Some common data types include integers, floating point numbers, characters, strings, and arrays. e.g Dates follow the DATE structure, short numbers like 14, 20, 200 follow the INT(integers) data type while larger numbers like phone numbers follow the BIGINT type. Read more on data types here https://teachcomputerscience.com/database-data-types/.
 
-#customers
+# customers
 
       CREATE table customers
       (customer_id int PRIMARY KEY,
       first_name VARCHAR(20) not null,
       last_name VARCHAR(20) not null,
       address VARCHAR(20) ,
-      gender CHAR(6) not null CHECK(gender= 'male' or gender ='female');
-      INSERT INTO customers(customer_id,first_name,last_name,address,gender,order_date)
+      gender CHAR(6) not null CHECK(gender= 'male' or gender ='female'));
+      INSERT INTO customers(customer_id,first_name,last_name,address,gender)
       VALUES(20487, 'Olajumoke','Ade', 'Lekki','Female'),
             (20587, 'Olamiposi', 'Dickson', 'Lekki','Female'),
             (30787, 'John', 'Malcom', 'VI','Male'),
             (40987, 'Charlie', 'Simpson', 'Ogba','Male'),
-            (40988, 'Cain', 'Bently', 'Ikotun','Male','2020-09-08'),
+            (40988, 'Cain', 'Bently', 'Ikotun','Male'),
             (40989, 'Cynthia', 'Bently', 'Ikotun','Female'),
             (40985, 'Bimba', 'Cole', 'Ikota','Male'),
             (40983, 'Jay', 'Comma', 'Abuja','Male'),
@@ -125,12 +125,13 @@ E	  | 500   |	ZenithBank |  Transfer      |
    2. What is the most purchased item on the menu and how many times was it purchased by all customers?
    3. What is the total items and amount spent for person?
    4. What was the first item from the menu purchased by each customer?
-   5. 
-      SELECT first_name,gender, Hire_date,salary
-      FROM productions p
-      JOIN payments pm
-      ON p.employee_id=pm.employee_id;
-      
+
+
+            SELECT first_name,gender, Hire_date,salary
+            FROM productions p
+            JOIN payments pm
+            ON p.employee_id=pm.employee_id;
+
   
       
           

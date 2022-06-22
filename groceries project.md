@@ -1,11 +1,13 @@
 # GROCERIES EXPLORATORY DATA ANALYST PROJECT
 # Context
 
-I got this groceries_dataset from Kaggle where I wanted to understand the customers purchasing habit;the items mostly purchased including the days and time of months the items are purchased.
+I got this groceries_dataset from Kaggle where I wanted to understand the customers purchasing habit; the items mostly purchased including the days and time of month the items are purchased.
+
 This is quite important because it helps the stakeholders to understand what influences consumers' buying decisions. By understanding how consumers decide on a product, they can fill in the gap in the market and identify the products that are needed and the products that are obsolete.
 
 # Tools Used
 Microsoft Excel
+
 MYSQL
 
 # Datasets
@@ -13,7 +15,7 @@ The datasets was gotten from kaggle and it comprises of 3 columns with the descr
 
 # Solution
 
-Upon download of the dataset from kaggle, I noticed the Date wasn't in MYSQL date format. MySQL retrieves and displays DATE values in ' YYYY-MM-DD ' format but the groceries_dataset was in the excel date format so I changed the format by using the Format cells option.
+Upon download of the dataset from kaggle, I noticed the Date wasn't in MYSQL date format. MySQL retrieves and displays DATE values in  ' YYYY-MM-DD ' format but the groceries_dataset was in the excel date format so I changed the format by using the Format cells option.
 
 Then I imported the changed dataset in csv(comma seperated values) into MYSQL workbench using the import wizard and created a database schema 'groceries_project' that will house the table.
 

@@ -1,4 +1,4 @@
-# GROCERIES EXPLORATORY DATA ANALYST PROJECT
+# GROCERIES EXPLORATORY DATA ANALYSIS PROJECT
 # Context
 
 I got this groceries_dataset from Kaggle where I wanted to understand the customers purchasing habit; the items mostly purchased including the days and time of month the items are purchased.

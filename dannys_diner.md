@@ -93,6 +93,13 @@ The USE statement tells MySQL to use the named database as the default (current)
 	ON men.product_id = sal.product_id
 	GROUP BY sal.customer_id
 	ORDER BY total_spent DESC;
+	
+customer_id | total_spent |
+----------- | :--------:  | 
+   A   	    |	76	  |
+   B 	    |	74        |
+   C  	    |	36        |
+
 
 # How many days has each customer visited the restaurant?
 
@@ -102,6 +109,12 @@ The USE statement tells MySQL to use the named database as the default (current)
 	GROUP BY customer_id
 	ORDER BY visits DESC;
 
+customer_id | visits |
+----------- | :----: | 
+   B  	    |	6    |
+   A	    |	4    |
+   C  	    |	2    |
+   
 # What was the first item from the menu purchased by each customer?
 
 	WITH ranked_products AS (
@@ -116,6 +129,13 @@ The USE statement tells MySQL to use the named database as the default (current)
 	FROM ranked_products
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
+	
+customer_id | product_name| purchased_first | order_date |
+----------- |-----------  | -----------     | :--------: | 
+A 	    | Sushi 	  | 	1 	    |2021-01-01  |
+B 	    | Curry       |     1           | 2021-01-01 |
+
+
 
 
 # What is the most purchased item on the menu and how many times was it purchased by all customers?
@@ -127,6 +147,10 @@ The USE statement tells MySQL to use the named database as the default (current)
 	GROUP BY men.product_name
 	ORDER BY times_purchased DESC
 	LIMIT 1;
+product_name | times_purchased |
+-----------  |:-------------:  | 
+ Ramen       |   8             |
+
 
 # Which item was the most popular for each customer?
 
@@ -137,6 +161,10 @@ The USE statement tells MySQL to use the named database as the default (current)
 	GROUP BY men.product_name
 	ORDER BY most_popular_item DESC
 	LIMIT 1;
+	
+product_name | most_popular_item |
+-----------  |:-------------:    | 
+ Ramen       |   8               |
 
 # Which item was purchased first by the customer after they became a member?
 
@@ -153,42 +181,14 @@ The USE statement tells MySQL to use the named database as the default (current)
 	FROM ranked_products
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
+	
+customer_id | product_name| purchased_first | order_date |
+----------- |-----------  | -----------     | :--------: | 
+A 	    | Sushi 	  | 	1 	    |2021-01-07  |
+B 	    | Curry       |     1           | 2021-01-11 |
 
-# Which item was purchased just before the customer became a member?
 
-	SELECT men.product_name,
-	COUNT(sal.product_id) AS times_purchased
-	FROM dannys_diner.sales sal
-	JOIN dannys_diner.menu men ON men.product_id = sal.product_id
-	GROUP BY men.product_name
-	ORDER BY times_purchased DESC
-	LIMIT 1;
 
-# Which item was the most popular for each customer?
-
-	SELECT men.product_name,
-	COUNT(sal.product_id) AS most_popular_item
-	FROM dannys_diner.sales sal
-	JOIN dannys_diner.menu men ON men.product_id = sal.product_id
-	GROUP BY men.product_name
-	ORDER BY most_popular_item DESC
-	LIMIT 1;
-
-# Which item was purchased first by the customer after they became a member?
-
-	WITH ranked_products AS (
-	SELECT mb.customer_id,m.product_name,s.order_date,
-	DENSE_RANK() OVER(PARTITION BY mb.customer_id ORDER BY s.order_date) AS purchased_first
-	FROM menu  m
-	JOIN sales s
-	ON m.product_id=s.product_id
-	JOIN member mb
-	ON s.customer_id=mb.customer_id
-	WHERE s.order_date >= mb.join_date)
-	SELECT customer_id,product_name,purchased_first,order_date
-	FROM ranked_products
-	WHERE purchased_first = 1
-	GROUP BY customer_id,purchased_first;
 
 # Which item was purchased just before the customer became a member?
 
@@ -205,6 +205,11 @@ The USE statement tells MySQL to use the named database as the default (current)
 	FROM ranked_products
 	WHERE purchased_first = 1
 	GROUP BY customer_id,purchased_first;
+
+customer_id | product_name| purchased_first | order_date |
+----------- |-----------  | -----------     | :--------: | 
+A 	    | Sushi 	  | 	1 	    |2021-01-01  |
+B 	    | Curry       |     1           | 2021-01-01 |
 
 # What is the total items and amount spent for each member before they became a member?
 
@@ -221,6 +226,12 @@ The USE statement tells MySQL to use the named database as the default (current)
 	GROUP BY customer_id
 	ORDER BY Amount_spent;
 
+customer_id |total_items |Amount_spent|
+----------- |----------- | :--------: | 
+A 	    |  25	 |	 25   |
+B           |  3         | 40         |
+
+
 # If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 	WITH points_per_purchase AS(
@@ -235,6 +246,13 @@ The USE statement tells MySQL to use the named database as the default (current)
 	FROM points_per_purchase
 	GROUP BY customer_id
 	ORDER BY customer_id;
+
+ customer_id |  total_points |
+ ----------- | :--------:    |
+    A        |    860        |
+    B        |    940 	     |
+    C 	     |  360          |
+
 
 # In the first week after a customer joins the program (including their join date) they earn 2x points on all items,
  not just sushi - how many points do customer A and B have at the end of January?
@@ -253,6 +271,12 @@ The USE statement tells MySQL to use the named database as the default (current)
 	GROUP BY customer_id
 	ORDER BY customer_id;
 
+customer_id |	total_points |
+----------- | :------------: |
+A	    |     10	     |
+B	    |      9	     |
+
+
 # Create a table adding the customer_id,order_date,product_name,price,and add a column to show customers who are members
 
 	SELECT sal.customer_id,sal.order_date,men.product_name,men.price,
@@ -264,6 +288,24 @@ The USE statement tells MySQL to use the named database as the default (current)
 	LEFT JOIN member mem ON mem.customer_id = sal.customer_id
 	JOIN menu men ON men.product_id = sal.product_id
 	ORDER BY customer_id,order_date,product_name;
+
+customer_id 	|	order_date	| product_name	| price	 | member |
+-----------     | -----------           | -----------   | ------ | :----: |
+A		|      2021-01-01	|  Curry	|  15	 |   N    |
+A		| 	2021-01-01	|   Sushi	|  10	 |   N    |
+A		|	 2021-01-07	|    Curry	|  15	 |    Y   |
+A		|	 2021-01-10	|   Ramen	| 12	 |  Y     |
+A		|	 2021-01-11	|   Ramen	| 12	 |    Y   |
+A		|	 2021-01-11	|   Ramen	| 12	 |   Y    |
+B		|	 2021-01-01	|    Curry	| 15	 |    N   |
+B		|	 2021-01-02	|   Curry	| 15	 |     N  |
+B		|	 2021-01-04	|  Sushi	| 10	 |    N   |
+B		|	 2021-01-11	|   Sushi	| 10	 |    Y   |
+B		|	 2021-01-16	|   Ramen	| 12	 |    Y   |
+B		|	 2021-02-01	|   Ramen	| 12	 |    Y   |
+C		|	 2021-01-01	|   Ramen	| 12	 |   N    |
+C		|	 2021-01-01	|   Ramen	| 12	 |  N     |
+C		|	 2021-01-07	|  Ramen	| 12	 |  N     |
 
 # Create a table adding the customer_id,order_date,product_name,price,and add a column to show ranking values for the records when customers are not yet part of the loyalty program
 
@@ -283,4 +325,22 @@ The USE statement tells MySQL to use the named database as the default (current)
 	END AS ranking
 	FROM customers_list
 	ORDER BY customer_id,order_date,product_name
+	
+customer_id 	|	order_date	| product_name	| price	 | member | ranking |
+-----------     | -----------           | -----------   | ------ |------  | :----:  |
+A		|      2021-01-01	|  Curry	|  15	 |   N    | Null    |
+A		| 	2021-01-01	|   Sushi	|  10	 |   N    | Null    |
+A		|	 2021-01-07	|    Curry	|  15	 |    Y   | 1       |
+A		|	 2021-01-10	|   Ramen	| 12	 |  Y     | 2       |
+A		|	 2021-01-11	|   Ramen	| 12	 |    Y   | 2       |
+A		|	 2021-01-11	|   Ramen	| 12	 |   Y    | 2       |
+B		|	 2021-01-01	|    Curry	| 15	 |    N   | Null    |
+B		|	 2021-01-02	|   Curry	| 15	 |     N  | Null    |
+B		|	 2021-01-04	|  Sushi	| 10	 |    N   | Null    |
+B		|	 2021-01-11	|   Sushi	| 10	 |    Y   | 3       |
+B		|	 2021-01-16	|   Ramen	| 12	 |    Y   | 2       |
+B		|	 2021-02-01	|   Ramen	| 12	 |    Y   | 2       |
+C		|	 2021-01-01	|   Ramen	| 12	 |   N    | Null    |
+C		|	 2021-01-01	|   Ramen	| 12	 |  N     | Null    |
+C		|	 2021-01-07	|  Ramen	| 12	 |  N     | Null    |
 
